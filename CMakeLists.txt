@@ -17,12 +17,14 @@ target_include_directories( monalisa SYSTEM PRIVATE ${SFML_INCLUDE_DIR} )
 target_link_libraries( monalisa ${SFML_LIBRARIES} )
 
 if( MSVC )
-  target_compile_options( monalisa PRIVATE "/W4" )
+    target_compile_options( monalisa PRIVATE "/W4" )
 else()
-  target_compile_options( monalisa PRIVATE
-                          -Werror
-                          -Wall
-                          -Wextra
-                          -Wno-long-long
-                          -pedantic )
+    target_compile_options( monalisa PRIVATE
+                            -Wall
+                            -Werror
+                            -Wextra
+                            -Wmissing-include-dirs
+                            -Wno-long-long
+                            -Wpedantic
+                            -Wuninitialized )
 endif()
