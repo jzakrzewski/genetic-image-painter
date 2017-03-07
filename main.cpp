@@ -17,8 +17,6 @@ using Img = std::vector<uint8_t>;
 
 Img createImage( const ImgSpecs &img_specs ) { return Img( img_specs.pix_cnt ); }
 
-std::mt19937 new_twister() { return std::mt19937{std::random_device{}()}; }
-
 template <class G, class D1, class D2, class D3>
 void mutate( Img &spec, const ImgSpecs &img_specs, G &generator, D1 &color_dist, D2 &width_dist, D3 &height_dist ) {
   int width = width_dist( generator );
@@ -76,7 +74,7 @@ int main( int argc, char **argv ) {
   const auto file_name = std::string{argv[ 3 ]};
 
   // Init random stuff
-  auto twister{new_twister()};
+  auto generator = std::mt19937{std::random_device{}()};
   auto color_dist = std::uniform_int_distribution<uint8_t>{0, 255};
   auto width_dist = std::uniform_int_distribution<size_t>{1, img_specs.width / 2};
   auto height_dist = std::uniform_int_distribution<size_t>{1, img_specs.height / 2};
@@ -123,7 +121,7 @@ int main( int argc, char **argv ) {
     }
 
     auto current = current_best;
-    mutate( current, img_specs, twister, color_dist, width_dist, height_dist );
+    mutate( current, img_specs, generator, color_dist, width_dist, height_dist );
     double newScore = score_me( current, ideal, img_specs );
 
     if ( newScore < best_score ) {
