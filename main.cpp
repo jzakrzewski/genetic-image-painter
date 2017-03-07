@@ -36,7 +36,7 @@ void mutate( Img &spec, const ImgSpecs &img_specs, G &generator, D1 &color_dist,
   }
 }
 
-double score_me( const Img &sp, const Img &ideal, const ImgSpecs &img_specs ) {
+double calculateScore(const Img &sp, const Img &ideal, const ImgSpecs &img_specs) {
   double sc = 0.0;
   for ( size_t j = 0; j < img_specs.height; j++ ) {
     for ( size_t i = 0; i < img_specs.width; i++ ) {
@@ -122,7 +122,7 @@ int main( int argc, char **argv ) {
 
     auto current = current_best;
     mutate( current, img_specs, generator, color_dist, width_dist, height_dist );
-    double newScore = score_me( current, ideal, img_specs );
+    double newScore = calculateScore(current, ideal, img_specs);
 
     if ( newScore < best_score ) {
       current_best.swap( current );
