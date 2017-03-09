@@ -11,7 +11,7 @@ set( SOURCES
 
 add_executable( monalisa ${SOURCES} )
 set_target_properties( monalisa PROPERTIES
-                       CXX_STANDARD 11
+                       CXX_STANDARD 17
                        CXX_STANDARD_REQUIRED ON )
 target_include_directories( monalisa SYSTEM PRIVATE ${SFML_INCLUDE_DIR} )
 target_link_libraries( monalisa ${SFML_LIBRARIES} )
@@ -27,4 +27,5 @@ else()
                             -Wno-long-long
                             -Wpedantic
                             -Wuninitialized )
+    target_link_libraries(monalisa stdc++fs)
 endif()
