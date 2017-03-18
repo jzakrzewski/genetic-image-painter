@@ -2,6 +2,7 @@ cmake_minimum_required( VERSION 3.8 FATAL_ERROR )
 
 project( "Genetic Image Painter" CXX )
 set( CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake" ${CMAKE_MODULE_PATH} )
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 find_package( SFML 2 REQUIRED graphics system window )
 
@@ -20,6 +21,8 @@ if( MSVC )
     target_compile_options( monalisa PRIVATE "/W4" )
 else()
     target_compile_options( monalisa PRIVATE
+                            -ftree-vectorize
+                            -msse2
                             -Wall
                             -Werror
                             -Wextra

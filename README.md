@@ -23,7 +23,7 @@ cmake --build .
 ```
 
 ## To do
-* actually use genetic algorithm instead of simple selection
+* improve performance
 * ensure it builds at least with MSVC, GCC and Clang
 * if filesystem not available, fallback to c++11/14 and use boost
 * if no boost, disable additional checks and let it crash ;)
